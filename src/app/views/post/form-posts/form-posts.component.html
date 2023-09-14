@@ -1,0 +1,58 @@
+<app-header-page
+  [title]="title!"
+  subtitle="Employee Management System"
+></app-header-page>
+<div class="flex flex-col w-full md:w-2/3 mt-8 mb-8">
+  <form (submit)="create()" [formGroup]="formData">
+    <input-with-label
+      formControlName="title"
+      label="Title"
+      [error]="submit && formData.get('title')!.invalid"
+    >
+      <div *ngIf="submit && formData.get('title')!.invalid">
+        <error-input *ngIf="formData.get('title')!.errors?.['required']">
+          Title is required!
+        </error-input>
+      </div>
+    </input-with-label>
+
+    <input-with-label
+      formControlName="body"
+      [textArea]="true"
+      label="Body"
+      [error]="submit && formData.get('body')!.invalid"
+    >
+      <div *ngIf="submit && formData.get('body')!.invalid">
+        <error-input *ngIf="formData.get('body')!.errors?.['required']">
+          Body is required!
+        </error-input>
+      </div>
+    </input-with-label>
+
+    <input-with-label
+      formControlName="userId"
+      label="User ID"
+      tip="number"
+      [error]="submit && formData.get('userId')!.invalid"
+    >
+      <div *ngIf="submit && formData.get('userId')!.invalid">
+        <error-input *ngIf="formData.get('userId')!.errors?.['required']">
+          User ID is required!
+        </error-input>
+        <error-input *ngIf="formData.get('userId')!.errors?.['userId']">
+          User ID must be a valid email address!
+        </error-input>
+      </div>
+    </input-with-label>
+
+    <div class="flex mt-12 justify-end space-x-3">
+      <button-component
+        (click)="close()"
+        type="button"
+        color="btn-white border border-gray-300"
+        >Cancel</button-component
+      >
+      <button-component [loading]="loading">Save</button-component>
+    </div>
+  </form>
+</div>

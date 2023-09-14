@@ -1,0 +1,36 @@
+<app-modal [id]="id">
+  <div class="modal-body space-x-2">
+    <div class="flex justify-center bg-red-50 w-full mb-14">
+      <div
+        class="w-28 h-28 absolute flex justify-center items-center -top-14 rounded-full border-[3.5px] border-gray-200 bg-gray-50"
+      >
+        <svg
+          fill="currentColor"
+          class="w-14 h-14 text-blue-700"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            clip-rule="evenodd"
+            fill-rule="evenodd"
+            d="M4.5 2A1.5 1.5 0 003 3.5v13A1.5 1.5 0 004.5 18h11a1.5 1.5 0 001.5-1.5V7.621a1.5 1.5 0 00-.44-1.06l-4.12-4.122A1.5 1.5 0 0011.378 2H4.5zm7.75 9.75a.75.75 0 000-1.5h-4.5a.75.75 0 000 1.5h4.5z"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <div *ngIf="loading" class="flex justify-center">
+      <app-loading></app-loading>
+    </div>
+    <div *ngIf="!loading">
+      <app-text-between
+        *ngFor="let item of data | keyvalue"
+        [left]="item.key"
+        [right]="item.value"
+      ></app-text-between>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button-component (click)="modal.dismiss()">Close</button-component>
+  </div>
+</app-modal>
